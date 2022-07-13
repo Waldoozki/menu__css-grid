@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --color-1: #3334568c;
+  --color-2: #F4ABC4;
+  --color-4: #EEEEEE;
+}
+body {
+  font-family: 'Raleway', sans-serif;
+}
+.container {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 1200px;
+  overflow: hidden;
+}
+.hero {
+  background-image: linear-gradient(#0000003c, #0000005c), url('./assets/wallpaper__mountain-pxArt--2.gif');
+  background-size: cover;
+  min-height: 500px;
+  height: 100vh;
+  color: var(--color-4);
+}
+.title {
+  z-index: 1;
+}
+.nav {
+  --state-close: scale(0);
+  --state-hamburguer: scale(1);
+  --state-menu: translateX(-100%);
+  padding: 40px 0;
+  display: grid;
+  grid-template-columns: repeat(2, max-content);
+  justify-content: space-between;
+  align-items: center;
+}
+.nav:target {
+  --state-close: scale(1);
+  --state-hamburguer: scale(0);
+  --state-menu: translateX(0);
+}
+.nav__links {
+  display: none;
+}
+.nav__close {
+  transform: var(--state-close);
+}
+.nav__hamburguer {
+  transform: var(--state-hamburguer);
+}
+.nav__hamburguer, .nav__close {
+  cursor: pointer;
+  grid-column: 2/-1;
+  grid-row: 1/2;
+  transition: .5s transform;
+}
+/* nav__links */
+.nav__links {
+  background-color: var(--color-1);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0;
+  display: grid;
+  justify-content: center;
+  text-align: center;
+  align-content: center;
+  gap: 35px;
+  transform: var(--state-menu);
+  transition: .5s transform ease-in-out;
+}
+.nav__item {
+  list-style: none;
+}
+.nav__link {
+  text-decoration: none;
+  color: var(--color-4);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+/* RESPONSIVE */
+@media (min-width:768px) {
+  .nav {
+    --state-hamburguer: scale(0);
+    --state-menu: translateX(0);
+  }
+  .nav:target {
+    --state-close: scale(0);
+  }
+  .nav__links {
+    background-color: unset;
+    position: unset;
+    transform: unset;
+    grid-auto-flow: column;
+    grid-column: -2/-1;
+    grid-row: 1/2;
+  }
+  .nav__link {
+    letter-spacing: none;
+    text-transform: unset;
+    --clippy: polygon(0 0, 0 0, 0 100%, 0% 100%);
+  }
+  .nav__link::after {
+    content: "";
+    display: block;
+    background-color: var(--color-2);
+    width: 100%;
+    margin-top: 3px;
+    height: 2px;
+    clip-path: var(--clippy);
+    transition: clip-path .3s;
+  }
+  .nav__link:hover {
+    --clippy: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+/* FINISH */
